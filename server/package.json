@@ -2,7 +2,7 @@
   "name": "reflake",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js",
@@ -23,6 +23,7 @@
     "@types/cors": "^2.8.14",
     "@types/express": "^4.17.17",
     "@types/jsonwebtoken": "^9.0.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "@types/node": "^20.6.0"
   }
 }
