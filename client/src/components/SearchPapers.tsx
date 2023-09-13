@@ -1,6 +1,8 @@
 import { useSetRecoilState } from "recoil";
 import { setDOI } from "../config/atom";
 import { useState } from "react";
+import axios from "axios";
+import { URL } from "../config/URL";
 
 function SearchPapers() {
   const [search, setSearch] = useState("");
@@ -12,7 +14,8 @@ function SearchPapers() {
       if (response) {
         const data = await response.json();
         setValue(data.message);
-        console.log(data.message);
+        axios.post(URL, data.message);
+        // console.log(data.message);
       } else {
         console.log("no response");
       }
@@ -21,7 +24,7 @@ function SearchPapers() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
     getPaper(search);
   };

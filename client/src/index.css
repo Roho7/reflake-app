@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  @apply bg-gray-100 p-4;
+}
+
+button {
+  @apply bg-purple-300 p-4;
+}
+h1 {
+  @apply text-xl;
+}
