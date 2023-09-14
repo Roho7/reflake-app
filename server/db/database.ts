@@ -1,23 +1,25 @@
 import mongoose from "mongoose";
 
+const paperSchema = new mongoose.Schema({
+  title: Array,
+  author: Array,
+  DOI: String,
+  URL: String,
+  publisher: String,
+});
+
+const lakeSchema = new mongoose.Schema({
+  lakeName: String,
+  dayCreated: Date,
+  papers: [paperSchema],
+});
+
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
-});
-
-const collectionSchema = new mongoose.Schema({
-  paperId: [{ type: mongoose.Schema.Types.ObjectId, ref: "Papers" }],
-});
-
-const paperSchema = new mongoose.Schema({
-  title: String,
-  published: String,
-  author: Object,
-  DOI: String,
-  abstract: String,
-  publisher: String,
+  lakes: [lakeSchema],
 });
 
 export const User = mongoose.model("User", userSchema);
 export const Paper = mongoose.model("Paper", paperSchema);
-export const Collection = mongoose.model("Collection", collectionSchema);
+export const Lake = mongoose.model("Lake", lakeSchema);

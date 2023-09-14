@@ -1,14 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+#root {
+  @apply bg-base-100;
+}
 input {
-  @apply bg-gray-100 p-4;
+  @apply bg-base-500 p-4 placeholder-base-700;
 }
 
 button {
-  @apply bg-purple-300 p-4;
+  @apply bg-base-100 p-4 hover:bg-base-500;
 }
+
 h1 {
-  @apply text-xl;
+  @apply text-xl text-seal-500;
+}
+
+h2 {
+  @apply text-2xl text-seal-500;
+}
+ul {
+  @apply text-seal-500;
+}
+li {
+  @apply text-lg;
+}
+.primary-box {
+  @apply border border-seal-500 p-4 transition-colors ease-linear;
+}
+.secondary-box {
+  @apply border border-seal-500 p-2 ease-linear;
 }

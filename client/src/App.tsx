@@ -1,12 +1,28 @@
 import "./App.css";
-import SearchPapers from "./components/SearchPapers";
-import ViewPaper from "./components/ViewPaper";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Signin from "./pages/Signin.tsx";
+import Signup from "./pages/Signup.tsx";
+import Homepage from "./pages/Homepage.tsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Homepage />,
+  },
+  {
+    path: "signin",
+    element: <Signin />,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
+  },
+]);
 
 function App() {
   return (
     <div className="flex flex-col w-screen h-screen justify-center items-center">
-      <SearchPapers />
-      <ViewPaper />
+      <RouterProvider router={router} />
     </div>
   );
 }

@@ -15,7 +15,6 @@ function SearchPapers() {
         const data = await response.json();
         setValue(data.message);
         axios.post(URL, data.message);
-        // console.log(data.message);
       } else {
         console.log("no response");
       }
@@ -36,10 +35,10 @@ function SearchPapers() {
           type="text"
           name="doin"
           id="doi"
-          placeholder="Enter DOI"
+          placeholder="enter a doi..."
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button onClick={handleSubmit}>Submit</button>
+        <button onClick={handleSubmit}>Search</button>
       </form>
     </div>
   );
