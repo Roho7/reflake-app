@@ -12,7 +12,10 @@ export const generateJwt = (
   if (token) {
     try {
       const user = jwt.verify(token, SECRET);
-      next();
+      // res.cookie("token", token);
+      if (user) {
+        next();
+      }
     } catch (err) {
       res.clearCookie("token");
       return res.redirect("/null");

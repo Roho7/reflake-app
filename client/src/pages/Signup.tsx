@@ -1,5 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+import { signupURL } from "../config/URL";
 
 function Signup() {
   const [loginInfo, setLoginInfo] = useState({
@@ -11,6 +13,11 @@ function Signup() {
   const { username, password, confirmation } = loginInfo;
   const handleChange = (e: any) => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    const data = await axios.post(signupURL, loginInfo);
+    console.log(data);
   };
   return (
     <div>
@@ -42,7 +49,7 @@ function Signup() {
             value={confirmation}
             onChange={handleChange}
           />
-          <button>Login</button>
+          <button onClick={handleSubmit}>Login</button>
         </form>
       </div>
     </div>

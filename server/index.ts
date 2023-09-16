@@ -26,7 +26,7 @@ app.get("/", generateJwt, (req, res) => {
   res.send("Hello");
 });
 
-app.post("/paper", async (req, res) => {
+app.post("/paper", generateJwt, async (req, res) => {
   const { DOI, author, title, publisher, URL } = req.body;
   const { token } = req.cookies;
   console.log(token);
