@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { setDOI } from "../config/atom";
 import axios from "axios";
-import { URL } from "../config/URL";
+import { paperURL } from "../config/URL";
 import { useEffect, useState } from "react";
 
 interface Author {
@@ -23,7 +23,7 @@ function ViewPaper() {
 
   const addPaper = async () => {
     console.log(paper);
-    await axios.post(URL, paper);
+    await axios.post(paperURL, paper);
   };
   const closePopup = (event: React.MouseEvent) => {
     event.preventDefault();

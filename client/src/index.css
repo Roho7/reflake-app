@@ -27,8 +27,15 @@ ul {
 li {
   @apply text-lg;
 }
+.home-button-box {
+  @apply relative border border-seal-500 z-40 bg-base-100 p-4 transition-colors ease-linear [&>*]:hover:text-base-50 hover:translate-x-1 hover:-translate-y-1;
+}
+.home-button-box::after {
+  content: "";
+  @apply absolute h-full w-full top-0 left-0 bg-seal-500 -z-10 hover:top-1;
+}
 .primary-box {
-  @apply border border-seal-500 p-4 transition-colors ease-linear;
+  @apply border border-seal-500 p-4;
 }
 .secondary-box {
   @apply border border-seal-500 p-2 ease-linear;

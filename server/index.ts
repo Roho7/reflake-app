@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -6,6 +6,7 @@ import { generateJwt } from "./middleware/auth";
 import { login } from "./routes/login";
 import { signup } from "./routes/signup";
 import { Paper } from "./db/database";
+import { createLakes } from "./routes/createLakes";
 
 const app = express();
 const port = 3000;
@@ -40,6 +41,8 @@ app.post("/paper", generateJwt, async (req, res) => {
     res.json({ message: "Paper added", title });
   }
 });
+
+app.post("/lakes", createLakes);
 
 app.listen(port, () => {
   console.log("app running on port", port);

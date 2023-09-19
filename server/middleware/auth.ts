@@ -8,7 +8,6 @@ export const generateJwt = (
   next: NextFunction,
 ) => {
   const token = req.cookies.token;
-  console.log(token);
   if (token) {
     try {
       const user = jwt.verify(token, SECRET);

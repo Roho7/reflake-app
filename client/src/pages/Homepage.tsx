@@ -10,10 +10,10 @@ function Homepage() {
           <h1 className="text-6xl">Dr. Andrew Huberman</h1>
         </div>
         <div className="flex flex-col gap-4">
-          <div className="primary-box hover:bg-tangerine-500 [&>*]:hover:text-base-50">
+          <div className="home-button-box hover:bg-tangerine-500 ">
             <h2>See Latest News</h2>
           </div>
-          <div className="primary-box hover:bg-mango-500 [&>*]:hover:text-base-50">
+          <div className="home-button-box hover:bg-mango-500 ">
             <h2>Discover Papers</h2>
           </div>
         </div>

@@ -13,5 +13,8 @@ export const login = async (req: Request, res: Response) => {
   res.cookie("token", token, {
     httpOnly: true,
   });
+  res.cookie("username", username, {
+    httpOnly: true,
+  });
   return res.redirect("/");
 };

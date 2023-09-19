@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Signin from "./pages/Signin.tsx";
 import Signup from "./pages/Signup.tsx";
 import Homepage from "./pages/Homepage.tsx";
+import CreateLake from "./components/CreateLake.tsx";
 
 const router = createBrowserRouter([
   {
@@ -10,12 +11,16 @@ const router = createBrowserRouter([
     element: <Homepage />,
   },
   {
-    path: "signin",
+    path: "login",
     element: <Signin />,
   },
   {
     path: "signup",
     element: <Signup />,
+  },
+  {
+    path: "lakes",
+    element: <CreateLake />,
   },
 ]);
 
