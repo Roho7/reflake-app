@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 #root {
-  @apply bg-base-100;
+  @apply bg-base-100 -z-10;
 }
 input {
   @apply bg-base-500 p-4 placeholder-base-700;
@@ -28,12 +28,19 @@ li {
   @apply text-lg;
 }
 .home-button-box {
-  @apply relative border border-seal-500 z-40 bg-base-100 p-4 transition-colors ease-linear [&>*]:hover:text-base-50 hover:translate-x-1 hover:-translate-y-1;
+  @apply relative;
 }
+.home-btn {
+  z-index: 1;
+  @apply relative border border-seal-500 bg-base-100 p-4 transition-all ease-linear [&>*]:hover:text-base-50 group-hover:translate-x-1 group-hover:-translate-y-1 cursor-pointer;
+}
+
 .home-button-box::after {
   content: "";
-  @apply absolute h-full w-full top-0 left-0 bg-seal-500 -z-10 hover:top-1;
+  z-index: 0;
+  @apply absolute bg-seal-500 left-0 top-0 right-0 bottom-0 group-hover:-translate-x-1 group-hover:translate-y-1 ease-linear;
 }
+
 .primary-box {
   @apply border border-seal-500 p-4;
 }

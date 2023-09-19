@@ -2,11 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { SECRET } from "../utils/secret";
 
-export const generateJwt = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.token;
   if (token) {
     try {
@@ -20,6 +16,7 @@ export const generateJwt = (
       return res.redirect("/null");
     }
   } else {
+    res.send(403);
     console.log("error in reading token");
   }
 };

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-
 import { User } from "../db/database";
 import { generateToken } from "../utils/generateToken";
 

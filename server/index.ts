@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { generateJwt } from "./middleware/auth";
+import { verifyJwt } from "./middleware/auth";
 import { login } from "./routes/login";
 import { signup } from "./routes/signup";
 import { Paper } from "./db/database";
@@ -23,11 +23,11 @@ app.post("/signup", signup);
 
 app.post("/login", login);
 
-app.get("/", generateJwt, (req, res) => {
+app.get("/", verifyJwt, (req, res) => {
   res.send("Hello");
 });
 
-app.post("/paper", generateJwt, async (req, res) => {
+app.post("/paper", verifyJwt, async (req, res) => {
   const { DOI, author, title, publisher, URL } = req.body;
   const { token } = req.cookies;
   console.log(token);

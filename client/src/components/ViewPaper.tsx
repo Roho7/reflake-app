@@ -36,7 +36,7 @@ function ViewPaper() {
   }, [paper]);
   if (openPopup) {
     return (
-      <div className="absolute left-1/2 bottom-1/2 bg-base-50 shadow-xl">
+      <div className="absolute z-10 left-1/2 bottom-1/2 bg-base-50 shadow-xl">
         <a
           onClick={closePopup}
           className="absolute right-0 top-0 translate-x-1/2 -translate-y-1/2 p-4 hover:underline"

@@ -1,3 +1,4 @@
+import CreateLake from "../components/CreateLake";
 import SearchPapers from "../components/SearchPapers";
 import ViewPaper from "../components/ViewPaper";
 
@@ -10,21 +11,27 @@ function Homepage() {
           <h1 className="text-6xl">Dr. Andrew Huberman</h1>
         </div>
         <div className="flex flex-col gap-4">
-          <div className="home-button-box hover:bg-tangerine-500 ">
-            <h2>See Latest News</h2>
+          <div className="home-button-box group">
+            <div className="home-btn group-hover:bg-tangerine-500 ">
+              <h2>See Latest News</h2>
+            </div>
           </div>
-          <div className="home-button-box hover:bg-mango-500 ">
-            <h2>Discover Papers</h2>
+          <div className="home-button-box group">
+            <div className="home-btn group-hover:bg-mango-500 ">
+              <h2>Discover Papers</h2>
+            </div>
           </div>
         </div>
       </div>
       <div className="primary-box flex flex-col justify-between">
-        <h2 className="font-bold">Your Collections:</h2>
+        <h2 className="font-bold">Your Lakes:</h2>
         <ul>
           <li>Alzheirmers</li>
           <li>Parkinsons</li>
           <li>Autism</li>
         </ul>
+        <h2 className="font-bold mt-2">Create New Lake:</h2>
+        <CreateLake />
       </div>
       <div className="primary-box bg-base-50 flex flex-col gap-2">
         <h2 className="font-bold">Start Collecting Knowledge</h2>

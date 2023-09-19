@@ -2,21 +2,28 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { loginURL } from "../config/URL";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSignIn } from "react-auth-kit";
 
 function Signin() {
   const [loginInfo, setLoginInfo] = useState({ username: "", password: "" });
   const { username, password } = loginInfo;
   const navigate = useNavigate();
+  const signIn = useSignIn();
 
   const handleChange = (e: any) => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
-    await axios.post(loginURL, loginInfo);
-    navigate("/lakes");
-    redirect("/lakes");
+    const response = await axios.post(loginURL, loginInfo);
+    console.log(response);
+    // signIn({
+    //   token: response.data.token,
+    //   expiresIn: 3600,
+    //   tokenType: "Bearer",
+    // });
+    navigate("/");
   };
   return (
     <div>

@@ -10,11 +10,13 @@ export const login = async (req: Request, res: Response) => {
     return res.status(403).json({ error: "password doesn't match" });
   }
   const token = generateToken({ username, password });
+  res.send({
+    token: token,
+  });
   res.cookie("token", token, {
     httpOnly: true,
   });
   res.cookie("username", username, {
     httpOnly: true,
   });
-  return res.redirect("/");
 };
