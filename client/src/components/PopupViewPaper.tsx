@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { setDOI } from "../config/atom";
+import { lakesState, setDOI, usernameState } from "../config/atom";
 import axios from "axios";
 import { paperURL } from "../config/URL";
 import { useEffect, useState } from "react";
@@ -16,24 +16,43 @@ interface PaperDataType {
   author: Author[];
   publisher: string;
 }
+type LakeType = {
+  lakeName: string;
+  dayCreated: string;
+  papers: [];
+};
 
 function ViewPaper() {
   const [openPopup, setOpenPopup] = useState(false);
+  const lakes = useRecoilValue(lakesState);
   const paper = useRecoilValue<PaperDataType>(setDOI);
+  const username = useRecoilValue(usernameState);
+  const [selectedLake, setSelectedLake] = useState("");
 
   const addPaper = async () => {
-    console.log(paper);
-    await axios.post(paperURL, paper);
+    console.log(selectedLake);
+    await axios.post(paperURL, {
+      paper: paper,
+      lake: selectedLake,
+      username: username,
+    });
   };
   const closePopup = (event: React.MouseEvent) => {
     event.preventDefault();
     setOpenPopup(false);
   };
+
+  const handleSelect = (e: any) => {
+    console.log(e.target.value);
+    setSelectedLake(e.target.value);
+  };
+
   useEffect(() => {
     if (paper.DOI != "") {
       setOpenPopup(true);
     }
   }, [paper]);
+
   if (openPopup) {
     return (
       <div className="absolute z-10 left-1/2 bottom-1/2 bg-base-50 shadow-xl">
@@ -62,8 +81,10 @@ function ViewPaper() {
           <button onClick={addPaper} className="w-full">
             Add Paper to
           </button>
-          <select>
-            <option value="Collection 1">Collection</option>
+          <select value={selectedLake} onChange={handleSelect}>
+            {lakes.map((item: LakeType) => {
+              return <option value={item.lakeName}>{item.lakeName}</option>;
+            })}
           </select>
         </div>
       </div>

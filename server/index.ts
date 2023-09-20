@@ -5,7 +5,7 @@ import cors from "cors";
 import { verifyJwt } from "./middleware/auth";
 import { login } from "./routes/login";
 import { signup } from "./routes/signup";
-import { Paper } from "./db/database";
+import { Paper, User } from "./db/database";
 import { createLakes } from "./routes/createLakes";
 
 const app = express();
@@ -27,22 +27,49 @@ app.get("/", verifyJwt, (req, res) => {
   res.send("Hello");
 });
 
-app.post("/paper", verifyJwt, async (req, res) => {
-  const { DOI, author, title, publisher, URL } = req.body;
-  const { token } = req.cookies;
-  console.log(token);
-  const paper = await Paper.findOne({ DOI });
-  if (paper) {
-    res.json({ message: "Entry Already Exists" });
+app.post("/paper", async (req, res) => {
+  const { DOI, author, title, publisher, URL } = req.body.paper;
+  const lakeName = req.body.lake;
+  const username = req.body.username;
+  console.log("username", username);
+  const user = await User.findOne({ username });
+  if (user) {
+    const lake = user.lakes.find((c) => c.lakeName === lakeName);
+    if (lake) {
+      console.log("lake", lake);
+      const paper = lake?.papers.find((c) => c.DOI === DOI);
+      if (paper) {
+        res.status(403).json({ message: "Paper Already Exists" });
+      } else {
+        res.json({ message: "Paper added", paper });
+        lake?.papers.push({ DOI, author, title, publisher, URL });
+        await User.updateOne(
+          { username: user.username },
+          { lakes: lake },
+          { $set: { papers: lake?.papers } },
+        );
+      }
+    } else {
+      console.log("lake not found");
+    }
   } else {
-    const obj = { DOI, author, title, publisher, URL };
-    const newPaper = new Paper(obj);
-    await newPaper.save();
-    res.json({ message: "Paper added", title });
+    console.log("user not found");
   }
 });
 
 app.post("/lakes", createLakes);
+
+app.post("/viewlakes", async (req: Request, res: Response) => {
+  const username = req.body.username;
+  console.log("username", username);
+  const user = await User.findOne({ username });
+  if (user) {
+    res.send(user.lakes);
+  } else {
+    res.status(404);
+    res.json({ message: "user not found" });
+  }
+});
 
 app.listen(port, () => {
   console.log("app running on port", port);

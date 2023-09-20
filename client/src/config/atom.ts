@@ -16,6 +16,11 @@ export const setDOI = atom({
   },
 });
 
+export const lakesState = atom({
+  key: "setLakes",
+  default: [],
+});
+
 export const usernameState = atom({
   key: "usernameState",
   default: "",

@@ -8,17 +8,17 @@ import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RecoilRoot>
-      <BrowserRouter>
-        <AuthProvider
-          authName="token"
-          authType="cookie"
-          cookieDomain={window.location.hostname}
-          cookieSecure={false}
-        >
+    <AuthProvider
+      authName="token"
+      authType="cookie"
+      cookieDomain={window.location.hostname}
+      cookieSecure={true}
+    >
+      <RecoilRoot>
+        <BrowserRouter>
           <App />
-        </AuthProvider>
-      </BrowserRouter>
-    </RecoilRoot>
+        </BrowserRouter>
+      </RecoilRoot>
+    </AuthProvider>
   </React.StrictMode>,
 );
