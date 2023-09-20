@@ -18,7 +18,26 @@ export const setDOI = atom({
 
 export const lakesState = atom({
   key: "setLakes",
-  default: [],
+  default: [
+    {
+      lakeName: "",
+      dayCreated: "",
+      papers: [
+        {
+          DOI: "",
+          URL: "",
+          title: "",
+          author: [
+            {
+              given: "",
+              family: "",
+            },
+          ],
+          publisher: "",
+        },
+      ],
+    },
+  ],
 });
 
 export const usernameState = atom({

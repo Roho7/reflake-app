@@ -1,15 +1,15 @@
 import CreateLake from "../components/CreateLake";
 import SearchPapers from "../components/SearchPapers";
 import ViewPaper from "../components/PopupViewPaper";
-import Navbar from "../components/Navbar";
 import { useRecoilValue } from "recoil";
-import { usernameState } from "../config/atom";
+import { lakesState, usernameState } from "../config/atom";
+import { LakeType } from "../types/types";
 
 function Homepage() {
   const username = useRecoilValue(usernameState);
+  const lakes = useRecoilValue(lakesState);
   return (
     <>
-      <Navbar />
       <div className="grid gap-4 grid-cols-2 grid-rows-2 border">
         <div className="primary-box flex flex-col justify-between">
           <h2 className="text-3xl font-semibold">Welcome!</h2>
@@ -32,15 +32,13 @@ function Homepage() {
             <a href="/lakes">Your Lakes</a>
           </h2>
           <ul>
-            <li>
-              <a href="">Alzheirmers</a>
-            </li>
-            <li>
-              <a href="">Parkinsons</a>
-            </li>
-            <li>
-              <a href="">Autism</a>
-            </li>
+            {lakes.map((lake: LakeType) => {
+              return (
+                <li>
+                  <a href={"/lakes/" + lake.lakeName}>{lake.lakeName}</a>
+                </li>
+              );
+            })}
           </ul>
           <p className="text-base-500 my-2">Create a new lake</p>
           <CreateLake />

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
 import axios from "axios";
 import { signupURL } from "../config/URL";
 
@@ -21,7 +20,6 @@ function Signup() {
   };
   return (
     <div>
-      <Navbar />
       <div className="bg-base-50 p-4 flex flex-col gap-6 m-10">
         <h1 className="text-4xl">Create an new account</h1>
         <form action="" className="flex flex-col gap-2">

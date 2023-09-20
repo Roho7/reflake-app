@@ -5,7 +5,7 @@ import cors from "cors";
 import { verifyJwt } from "./middleware/auth";
 import { login } from "./routes/login";
 import { signup } from "./routes/signup";
-import { Paper, User } from "./db/database";
+import { User } from "./db/database";
 import { createLakes } from "./routes/createLakes";
 
 const app = express();

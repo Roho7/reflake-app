@@ -3,24 +3,7 @@ import { lakesState, setDOI, usernameState } from "../config/atom";
 import axios from "axios";
 import { paperURL } from "../config/URL";
 import { useEffect, useState } from "react";
-
-interface Author {
-  given: string;
-  family: string;
-}
-
-interface PaperDataType {
-  DOI: string;
-  URL: string;
-  title: string;
-  author: Author[];
-  publisher: string;
-}
-type LakeType = {
-  lakeName: string;
-  dayCreated: string;
-  papers: [];
-};
+import { LakeType, PaperDataType } from "../types/types";
 
 function ViewPaper() {
   const [openPopup, setOpenPopup] = useState(false);

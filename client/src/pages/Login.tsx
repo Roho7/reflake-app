@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
 import axios from "axios";
 import { loginURL } from "../config/URL";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +31,6 @@ function Login() {
   };
   return (
     <div>
-      <Navbar />
       <div className="bg-base-50 p-4 flex flex-col gap-6">
         <h1 className="text-4xl">Login</h1>
         <div className="flex flex-col gap-2">
