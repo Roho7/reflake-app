@@ -7,11 +7,15 @@
   @apply bg-base-100 -z-10;
 }
 input {
-  @apply bg-base-500 p-4 placeholder-base-700;
+  @apply bg-base-500 p-2 placeholder-base-700 border border-seal-100;
 }
 
 button {
-  @apply bg-base-100 p-4 hover:bg-base-500;
+  @apply border border-seal-100 py-2 px-4 hover:bg-base-700 hover:text-base-50 font-medium;
+}
+
+.nav-btn {
+  @apply bg-mango-500 hover:bg-tangerine-500;
 }
 
 h1 {
@@ -26,6 +30,9 @@ ul {
 }
 li {
   @apply text-lg;
+}
+a {
+  @apply hover:text-tangerine-500;
 }
 .home-button-box {
   @apply relative;

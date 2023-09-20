@@ -1,33 +1,32 @@
 import "./App.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Signin from "./pages/Signin.tsx";
+import {
+  Route,
+  RouterProvider,
+  Routes,
+  // createBrowserRouter,
+} from "react-router-dom";
+import Login from "./pages/Login.tsx";
 import Signup from "./pages/Signup.tsx";
 import Homepage from "./pages/Homepage.tsx";
 import CreateLake from "./components/CreateLake.tsx";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "login",
-    element: <Signin />,
-  },
-  {
-    path: "signup",
-    element: <Signup />,
-  },
-  {
-    path: "lakes",
-    element: <CreateLake />,
-  },
-]);
+import { RequireAuth } from "react-auth-kit";
 
 function App() {
   return (
     <div className="flex flex-col w-screen h-screen justify-center items-center">
-      <RouterProvider router={router} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <RequireAuth loginPath="/login">
+              <Homepage />
+            </RequireAuth>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/lakes" element={<CreateLake />} />
+      </Routes>
     </div>
   );
 }

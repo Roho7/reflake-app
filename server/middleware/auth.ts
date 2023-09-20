@@ -7,7 +7,6 @@ export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
   if (token) {
     try {
       const user = jwt.verify(token, SECRET);
-      // res.cookie("token", token);
       if (user) {
         next();
       }
@@ -16,7 +15,7 @@ export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
       return res.redirect("/null");
     }
   } else {
-    res.send(403);
+    res.status(403);
     console.log("error in reading token");
   }
 };

@@ -4,9 +4,12 @@ import axios from "axios";
 import { loginURL } from "../config/URL";
 import { useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
+import { useSetRecoilState } from "recoil";
+import { usernameState } from "../config/atom";
 
-function Signin() {
+function Login() {
   const [loginInfo, setLoginInfo] = useState({ username: "", password: "" });
+  const setRecoilUsername = useSetRecoilState(usernameState);
   const { username, password } = loginInfo;
   const navigate = useNavigate();
   const signIn = useSignIn();
@@ -18,11 +21,13 @@ function Signin() {
     e.preventDefault();
     const response = await axios.post(loginURL, loginInfo);
     console.log(response);
-    // signIn({
-    //   token: response.data.token,
-    //   expiresIn: 3600,
-    //   tokenType: "Bearer",
-    // });
+    signIn({
+      token: response.data.token,
+      expiresIn: 3600,
+      tokenType: "Bearer",
+      authState: { username: loginInfo.username },
+    });
+    setRecoilUsername(username);
     navigate("/");
   };
   return (
@@ -54,4 +59,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default Login;

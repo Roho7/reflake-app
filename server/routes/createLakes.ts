@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import { User } from "../db/database";
 
 export const createLakes = async (req: Request, res: Response) => {
-  const lakeName = req.body.lakeName;
-  const username = req.cookies.username;
+  const { lakeName, username } = req.body;
+  console.log("username", username);
   const user = await User.findOne({ username });
   if (user) {
     const lake = user.lakes.find((c) => c.lakeName === lakeName);

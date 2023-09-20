@@ -14,6 +14,7 @@ export default {
           700: "#6B6D59",
         },
         seal: {
+          100: "#728995",
           500: "#1A3746",
         },
         tangerine: {

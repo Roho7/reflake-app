@@ -15,3 +15,8 @@ export const setDOI = atom({
     publisher: "",
   },
 });
+
+export const usernameState = atom({
+  key: "usernameState",
+  default: "",
+});
