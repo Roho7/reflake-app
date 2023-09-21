@@ -11,9 +11,14 @@ function CreateLake() {
     setLakeName(e.target.value);
   };
   const handleSubmit = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    const obj = { lakeName: lakeName, username: username };
-    await axios.post(lakesURL, obj);
+    if (lakeName === "") {
+      e.preventDefault();
+      alert("Enter a Lake Name");
+    } else {
+      const obj = { lakeName: lakeName, username: username };
+      await axios.post(lakesURL, obj);
+      location.reload();
+    }
   };
   return (
     <div>

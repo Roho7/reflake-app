@@ -22,17 +22,19 @@ function AllLakes() {
     console.log(activePaperArray.current.papers);
   };
   return (
-    <div className="h-full w-1/4 lg:w-1/6 fixed px-6 py-20 z-0 left-0 bg-base-500 flex flex-col">
+    <div className="h-full w-1/4 lg:w-1/6 fixed px-6 py-20 z-0 left-0 bg-base-500 flex flex-col gap-3">
       {!viewPapers &&
         lakes.map((item: LakeType) => {
           return (
-            <div
-              className="p-2 bg-base-50 mb-2"
-              onClick={() => handleLakeClick(item.lakeName)}
-              key={item.lakeName}
-            >
-              <h2 className="text-seal-500">{item.lakeName}</h2>
-              <p className="text-seal-100">Papers: {item.papers.length}</p>
+            <div className="home-button-box group">
+              <div
+                className="home-btn"
+                onClick={() => handleLakeClick(item.lakeName)}
+                key={item.lakeName}
+              >
+                <h2 className="text-seal-500">{item.lakeName}</h2>
+                <p className="text-seal-100">Papers: {item.papers.length}</p>
+              </div>
             </div>
           );
         })}

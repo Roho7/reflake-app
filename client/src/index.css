@@ -39,7 +39,7 @@ a {
 }
 .home-btn {
   z-index: 1;
-  @apply relative border border-seal-500 bg-base-100 p-4 transition-all ease-linear [&>*]:hover:text-base-50 group-hover:translate-x-1 group-hover:-translate-y-1 cursor-pointer;
+  @apply relative border border-seal-500 bg-base-100 p-4 transition-all ease-linear group-hover:translate-x-1 group-hover:-translate-y-1 cursor-pointer;
 }
 
 .home-button-box::after {
