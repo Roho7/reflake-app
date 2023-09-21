@@ -4,6 +4,7 @@ import { SECRET } from "../utils/secret";
 
 export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.token;
+  console.log(token);
   if (token) {
     try {
       const user = jwt.verify(token, SECRET);

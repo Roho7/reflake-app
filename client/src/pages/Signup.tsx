@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { signupURL } from "../config/URL";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+import { useSignIn } from "react-auth-kit";
+import { useSetRecoilState } from "recoil";
+import { usernameState } from "../config/atom";
 
 function Signup() {
   const [loginInfo, setLoginInfo] = useState({
@@ -8,15 +13,27 @@ function Signup() {
     password: "",
     confirmation: "",
   });
-
   const { username, password, confirmation } = loginInfo;
+  const navigate = useNavigate();
+  const cookies = new Cookies(null, { path: "/" });
+  const signIn = useSignIn();
+  const setRecoilUsername = useSetRecoilState(usernameState);
+
   const handleChange = (e: any) => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
-    const data = await axios.post(signupURL, loginInfo);
-    console.log(data);
+    const response = await axios.post(signupURL, loginInfo);
+    signIn({
+      token: response.data.token,
+      expiresIn: 3600,
+      tokenType: "Bearer",
+      authState: { username: loginInfo.username },
+    });
+    cookies.set("username", username);
+    setRecoilUsername(username);
+    navigate("/");
   };
   return (
     <div>
@@ -47,7 +64,7 @@ function Signup() {
             value={confirmation}
             onChange={handleChange}
           />
-          <button onClick={handleSubmit}>Login</button>
+          <button onClick={handleSubmit}>Signup</button>
         </form>
       </div>
     </div>

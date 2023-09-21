@@ -34,7 +34,7 @@ function Homepage() {
           <ul>
             {lakes.map((lake: LakeType) => {
               return (
-                <li>
+                <li key={lake.lakeName}>
                   <a href={"/lakes/" + lake.lakeName}>{lake.lakeName}</a>
                 </li>
               );

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
 import { useSetRecoilState } from "recoil";
 import { usernameState } from "../config/atom";
+import Cookies from "universal-cookie";
 
 function Login() {
   const [loginInfo, setLoginInfo] = useState({ username: "", password: "" });
@@ -12,6 +13,7 @@ function Login() {
   const { username, password } = loginInfo;
   const navigate = useNavigate();
   const signIn = useSignIn();
+  const cookies = new Cookies(null, { path: "/" });
 
   const handleChange = (e: any) => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
@@ -26,6 +28,7 @@ function Login() {
       tokenType: "Bearer",
       authState: { username: loginInfo.username },
     });
+    cookies.set("username", username);
     setRecoilUsername(username);
     navigate("/");
   };

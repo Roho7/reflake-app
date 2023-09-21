@@ -23,11 +23,11 @@ app.post("/signup", signup);
 
 app.post("/login", login);
 
-app.get("/", verifyJwt, (req, res) => {
-  res.send("Hello");
-});
+// app.get("/", verifyJwt, (req, res) => {
+//   res.send(true);
+// });
 
-app.post("/paper", async (req, res) => {
+app.post("/paper", verifyJwt, async (req, res) => {
   const { DOI, author, title, publisher, URL } = req.body.paper;
   const lakeName = req.body.lake;
   const username = req.body.username;
@@ -61,7 +61,6 @@ app.post("/lakes", createLakes);
 
 app.post("/viewlakes", async (req: Request, res: Response) => {
   const username = req.body.username;
-  console.log("username", username);
   const user = await User.findOne({ username });
   if (user) {
     res.send(user.lakes);

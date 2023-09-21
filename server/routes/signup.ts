@@ -10,10 +10,18 @@ export const signup = async (req: Request, res: Response) => {
   } else if (confirmation != password) {
     res.json({ message: "password doesn't match" });
   } else {
-    const obj = { username: username, password: password };
-    const newAdmin = new User(obj);
+    const token = generateToken({ username, password });
+    res.cookie("token", token, {
+      httpOnly: true,
+    });
+    res.cookie("username", username, {
+      httpOnly: true,
+    });
+    res.send({
+      token: token,
+    });
+    const newAdmin = new User({ username, password });
     await newAdmin.save();
-    const token = generateToken(obj);
     res.json({ message: "account created", token });
   }
 };
