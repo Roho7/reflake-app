@@ -1,11 +1,8 @@
-import { useRecoilValue } from "recoil";
-import { usernameState } from "../config/atom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSignOut } from "react-auth-kit";
 import Cookies from "universal-cookie";
 
 function Navbar() {
-  const username = useRecoilValue(usernameState);
   const navigate = useNavigate();
   const location = useLocation();
   const signout = useSignOut();

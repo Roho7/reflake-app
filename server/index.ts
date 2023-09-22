@@ -27,11 +27,11 @@ app.post("/login", login);
 //   res.send(true);
 // });
 
-app.post("/paper", verifyJwt, async (req, res) => {
+app.post("/paper", async (req, res) => {
   const { DOI, author, title, publisher, URL } = req.body.paper;
   const lakeName = req.body.lake;
   const username = req.body.username;
-  console.log("username", username);
+  console.log(req.body.paper);
   const user = await User.findOne({ username });
   if (user) {
     const lake = user.lakes.find((c) => c.lakeName === lakeName);
