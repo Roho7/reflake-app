@@ -27,6 +27,7 @@ function App() {
   }
 
   const setLakes = useSetRecoilState(lakesState);
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.post(viewlakesURL, {
@@ -35,7 +36,7 @@ function App() {
       setLakes(response.data);
     };
     fetchData();
-  }, []);
+  });
 
   return (
     <div className="flex flex-col w-screen h-screen justify-center items-center">

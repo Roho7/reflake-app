@@ -4,21 +4,24 @@ import axios from "axios";
 import { paperURL } from "../config/URL";
 import { useEffect, useState } from "react";
 import { LakeType, PaperDataType } from "../types/types";
+import Cookies from "universal-cookie";
 
 function ViewPaper() {
   const [openPopup, setOpenPopup] = useState(false);
   const lakes = useRecoilValue(lakesState);
   const paper = useRecoilValue<PaperDataType>(setDOI);
-  const username = useRecoilValue(usernameState);
+  const cookie = new Cookies(null, { path: "/" });
   const [selectedLake, setSelectedLake] = useState("");
 
   const addPaper = async () => {
-    console.log(selectedLake);
+    console.log("paper", paper);
+
     await axios.post(paperURL, {
       paper: paper,
       lake: selectedLake,
-      username: username,
+      username: cookie.get("username"),
     });
+    setOpenPopup(false);
   };
   const closePopup = (event: React.MouseEvent) => {
     event.preventDefault();
