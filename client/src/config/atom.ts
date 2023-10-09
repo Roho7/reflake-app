@@ -40,6 +40,24 @@ export const lakesState = atom({
   ],
 });
 
+export const activePaperState = atom({
+  key: "activePaper",
+  default: [
+    {
+      DOI: "",
+      URL: "",
+      title: "",
+      author: [
+        {
+          given: "",
+          family: "",
+        },
+      ],
+      publisher: "",
+    },
+  ],
+});
+
 export const usernameState = atom({
   key: "usernameState",
   default: "",

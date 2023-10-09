@@ -29,6 +29,7 @@ app.post("/login", login);
 
 app.post("/paper", async (req, res) => {
   const paperData = req.body?.paper;
+  console.log(paperData);
   const lakeName: string = req.body.lake;
   const username = req.body.username;
   const user = await User.findOne({ username });
@@ -75,7 +76,23 @@ app.post("/viewlakes", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/papers/:paperId", async (req, res) => {});
+app.get("/lakes/:lakeId", async (req, res) => {
+  try {
+    const lakeName = req.params.lakeId;
+    const user = await User.findOne({ "lakes.lakeName": lakeName });
+    if (!user) {
+      return res.status(404).json({ message: "Lake not found" });
+    }
+    const lake = user.lakes.find((l) => l.lakeName === lakeName);
+    if (!lake) {
+      return res.status(404).json({ message: "Lake not found" });
+    }
+    res.json({ lake });
+  } catch (error) {
+    console.error("Error fetching lake data:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 app.listen(port, () => {
   console.log("app running on port", port);

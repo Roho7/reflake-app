@@ -7,11 +7,11 @@ function ViewLakes() {
   const lakes = useRecoilValue(lakesState);
   const navigate = useNavigate();
   const handleLakeClick = (lake: string) => {
-    navigate(`/papers/${lake}`);
+    navigate(`/lakes/${lake}`);
     console.log();
   };
   return (
-    <div className="w-full h-full p-10 mt-20">
+    <div className="w-full h-full p-10">
       <h1 className="mb-4 font-bold text-6xl">All Lakes</h1>
       <div className="grid grid-row-4 w-full">
         {lakes.map((item: LakeType) => {

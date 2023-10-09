@@ -33,7 +33,7 @@ function Login() {
     navigate("/");
   };
   return (
-    <div>
+    <div className="h-full flex items-center">
       <div className="bg-base-50 p-4 flex flex-col gap-6">
         <h1 className="text-4xl">Login</h1>
         <div className="flex flex-col gap-2">

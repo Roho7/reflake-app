@@ -40,7 +40,7 @@ function App() {
   });
 
   return (
-    <div className="flex flex-col w-screen h-screen justify-center items-center">
+    <div className="flex flex-col gap-10 w-screen h-screen justify-center items-center">
       <Navbar />
       <Routes>
         <Route
@@ -54,7 +54,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/lakes" element={<ViewLakes />} />
-        <Route path="/papers/:paperId" element={<ViewPapers />} />
+        <Route path="/lakes/:lakeId" element={<ViewPapers />} />
       </Routes>
     </div>
   );

@@ -1,57 +1,56 @@
-import { useRecoilValue } from "recoil";
-import { lakesState } from "../config/atom";
-import { LakeType } from "../types/types";
-import { useRef, useState } from "react";
+import { PaperDataType } from "../types/types";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { activePaperState } from "../config/atom";
 
 function SideBar() {
-  const lakes = useRecoilValue(lakesState);
-  const [viewPapers, setViewPapers] = useState(false);
-  const setActivePaper = useRef("");
-  const activePaperArray = useRef<any>([]);
+  const { lakeId } = useParams();
+  const [lakeData, setLakeData] = useState([]);
+  const setActivePaper = useSetRecoilState(activePaperState);
+
+  const fetchData = async () => {
+    const response = await axios.get(`http://localhost:3000/lakes/${lakeId}`);
+    console.log(response.data.lake.papers);
+    setLakeData(response.data.lake.papers);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleLakeClick = (paper: string) => {
-    setViewPapers(!viewPapers);
-    setActivePaper.current = paper;
-    activePaperArray.current = lakes.find((item: LakeType): boolean => {
-      return item.lakeName === setActivePaper.current;
-    })?.papers;
-    console.log(activePaperArray.current);
+    setActivePaper(
+      lakeData.filter((t: PaperDataType) => {
+        return t.title === paper;
+      }),
+    );
   };
+
   return (
-    <div className="h-full w-1/4 lg:w-1/6 fixed px-6 py-20 z-0 left-0 bg-base-500 flex flex-col gap-3">
-      {!viewPapers &&
-        lakes.map((item: LakeType) => {
-          return (
-            <div className="home-button-box group">
-              <div
-                className="home-btn"
-                onClick={() => handleLakeClick(item.lakeName)}
-                key={item.lakeName}
-              >
-                <h2 className="text-seal-500">{item.lakeName}</h2>
-                <p className="text-seal-100">Papers: {item.papers.length}</p>
-              </div>
+    <div className="h-full w-1/4 lg:w-1/6 p-4 z-0 left-0 bg-base-500 flex flex-col gap-3">
+      {lakeData?.map((item: PaperDataType) => {
+        return (
+          <div className="home-button-box group">
+            <div
+              className="home-btn"
+              onClick={() => handleLakeClick(item.title)}
+              key={item.title}
+            >
+              <h3 className="text-seal-500 font-bold">{item.title}</h3>
+
+              {item.author.map((p) => {
+                return (
+                  <p>
+                    {p.given} {p.family}
+                  </p>
+                );
+              })}
             </div>
-          );
-        })}
-      {viewPapers &&
-        activePaperArray.current.map((item: any) => {
-          return (
-            <div className="p-2 bg-base-50 mb-2 box-border h-96 w-full ">
-              <p className="text-seal-100 text-xs ">{item.publisher}</p>
-              <h2 className="text-seal-500">{item.title}</h2>
-              <p className="text-seal-500">
-                {item.author.map((item: { given: string; family: string }) => {
-                  return (
-                    <span className="text-seal-100">
-                      {item.given} {item.family}
-                    </span>
-                  );
-                })}
-              </p>
-            </div>
-          );
-        })}
+          </div>
+        );
+      })}
     </div>
   );
 }

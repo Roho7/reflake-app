@@ -13,6 +13,7 @@ function SearchPapers() {
       const response = await fetch(`https://api.crossref.org/works/${doi}`);
       if (response) {
         const data = await response.json();
+        console.log(data);
         setValue(data.message);
         axios.post(paperURL, data.message);
       } else {
