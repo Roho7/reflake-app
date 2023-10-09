@@ -30,9 +30,7 @@ app.post("/login", login);
 app.post("/paper", async (req, res) => {
   const paperData = req.body?.paper;
   const lakeName: string = req.body.lake;
-  console.log(lakeName);
   const username = req.body.username;
-  console.log(username);
   const user = await User.findOne({ username });
   if (user) {
     console.log("user Found");
@@ -43,19 +41,18 @@ app.post("/paper", async (req, res) => {
       if (paper) {
         res.status(403).json({ message: "Paper Already Exists" });
       } else {
-        res.json({ message: "Paper added", paper });
-        lake.papers.push(
-          paperData.DOI,
-          paperData.author,
-          paperData.title,
-          paperData.publisher,
-          paperData.URL,
-        );
+        const newPaper = {
+          DOI: paperData.DOI,
+          author: paperData.author,
+          title: paperData.title,
+          publisher: paperData.publisher,
+          URL: paperData.URL,
+        };
+        lake.papers.push(newPaper);
+
+        await user.save();
         console.log("paper added");
-        await User.updateOne(
-          { username: user.username },
-          { $set: { papers: lake?.papers } },
-        );
+        res.json({ message: "Paper added", paper });
       }
     } else {
       console.log("lake not found");

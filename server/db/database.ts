@@ -1,8 +1,15 @@
 import mongoose from "mongoose";
 
+const authorSchema = new mongoose.Schema({
+  given: String,
+  family: String,
+  sequence: String,
+  affiliation: Array,
+});
+
 const paperSchema = new mongoose.Schema({
   title: Array,
-  author: Array,
+  author: [authorSchema],
   DOI: String,
   URL: String,
   publisher: String,

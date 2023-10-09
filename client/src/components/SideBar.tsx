@@ -37,7 +37,7 @@ function AllLakes() {
       {viewPapers &&
         activePaperArray.current.map((item: any) => {
           return (
-            <div className="p-2 bg-base-50 mb-2 box-border h-full w-full ">
+            <div className="p-2 bg-base-50 mb-2 box-border h-96 w-full ">
               <p className="text-seal-100 text-xs ">{item.publisher}</p>
               <h2 className="text-seal-500">{item.title}</h2>
               <p className="text-seal-500">
