@@ -3,7 +3,7 @@ import { lakesState } from "../config/atom";
 import { LakeType } from "../types/types";
 import { useRef, useState } from "react";
 
-function AllLakes() {
+function SideBar() {
   const lakes = useRecoilValue(lakesState);
   const [viewPapers, setViewPapers] = useState(false);
   const setActivePaper = useRef("");
@@ -56,4 +56,4 @@ function AllLakes() {
   );
 }
 
-export default AllLakes;
+export default SideBar;

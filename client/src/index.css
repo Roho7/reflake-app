@@ -19,7 +19,7 @@ button {
 }
 
 h1 {
-  @apply text-xl text-seal-500;
+  @apply text-2xl text-seal-500;
 }
 
 h2 {

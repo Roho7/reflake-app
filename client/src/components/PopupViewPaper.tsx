@@ -1,12 +1,12 @@
 import { useRecoilValue } from "recoil";
-import { lakesState, setDOI, usernameState } from "../config/atom";
+import { lakesState, setDOI } from "../config/atom";
 import axios from "axios";
 import { paperURL } from "../config/URL";
 import { useEffect, useState } from "react";
 import { LakeType, PaperDataType } from "../types/types";
 import Cookies from "universal-cookie";
 
-function ViewPaper() {
+function PaperPopup() {
   const [openPopup, setOpenPopup] = useState(false);
   const lakes = useRecoilValue(lakesState);
   const paper = useRecoilValue<PaperDataType>(setDOI);
@@ -78,4 +78,4 @@ function ViewPaper() {
   }
 }
 
-export default ViewPaper;
+export default PaperPopup;

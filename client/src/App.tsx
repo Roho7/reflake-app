@@ -4,7 +4,6 @@ import Login from "./pages/Login.tsx";
 import Signup from "./pages/Signup.tsx";
 import Homepage from "./pages/Homepage.tsx";
 import { RequireAuth } from "react-auth-kit";
-import AllLakes from "./components/SideBar.tsx";
 import { useSetRecoilState } from "recoil";
 import { lakesState, usernameState } from "./config/atom.ts";
 import Cookies from "universal-cookie";
@@ -12,6 +11,8 @@ import axios from "axios";
 import { viewlakesURL } from "./config/URL.ts";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar.tsx";
+import ViewLakes from "./pages/ViewLakes.tsx";
+import ViewPapers from "./pages/ViewPapers.tsx";
 
 function App() {
   const setUsername = useSetRecoilState(usernameState);
@@ -52,7 +53,8 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/lakes" element={<AllLakes />} />
+        <Route path="/lakes" element={<ViewLakes />} />
+        <Route path="/papers/:paperId" element={<ViewPapers />} />
       </Routes>
     </div>
   );

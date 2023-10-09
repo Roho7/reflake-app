@@ -75,6 +75,8 @@ app.post("/viewlakes", async (req: Request, res: Response) => {
   }
 });
 
+app.get("/papers/:paperId", async (req, res) => {});
+
 app.listen(port, () => {
   console.log("app running on port", port);
 });

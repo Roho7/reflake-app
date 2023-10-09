@@ -1,6 +1,6 @@
 import CreateLake from "../components/CreateLake";
 import SearchPapers from "../components/SearchPapers";
-import ViewPaper from "../components/PopupViewPaper";
+import PaperPopup from "../components/PopupViewPaper";
 import { useRecoilValue } from "recoil";
 import { lakesState, usernameState } from "../config/atom";
 import { LakeType } from "../types/types";
@@ -49,7 +49,7 @@ function Homepage() {
             <p className="text-base-500 mb-2">Enter a DOI to add a paper</p>
             <div className="relative">
               <SearchPapers />
-              <ViewPaper />
+              <PaperPopup />
             </div>
           </div>
         </div>
