@@ -9,7 +9,7 @@ function Homepage() {
   const username = useRecoilValue(usernameState);
   const lakes = useRecoilValue(lakesState);
   return (
-    <div className="h-full">
+    <div className="h-full mt-20">
       <div className="grid gap-4 grid-cols-2 grid-rows-2 border">
         <div className="primary-box flex flex-col justify-between">
           <h2 className="text-3xl font-semibold">Welcome!</h2>

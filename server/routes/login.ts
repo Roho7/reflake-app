@@ -12,9 +12,11 @@ export const login = async (req: Request, res: Response) => {
   const token = generateToken({ username, password });
   res.cookie("token", token, {
     httpOnly: true,
+    path: "/",
   });
   res.cookie("username", username, {
     httpOnly: true,
+    path: "/",
   });
   res.send({
     token: token,

@@ -36,7 +36,7 @@ function Signup() {
     navigate("/");
   };
   return (
-    <div>
+    <div className="h-full flex items-center">
       <div className="bg-base-50 p-4 flex flex-col gap-6 m-10">
         <h1 className="text-4xl">Create an new account</h1>
         <form action="" className="flex flex-col gap-2">

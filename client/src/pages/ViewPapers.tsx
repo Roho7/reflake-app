@@ -19,6 +19,7 @@ function ViewPapers() {
             </p>
           );
         })}
+        <h1 className="mt-10">Notes:</h1>
       </div>
     </div>
   );

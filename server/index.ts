@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
+import cookieParser, { signedCookie } from "cookie-parser";
 import cors from "cors";
 import { verifyJwt } from "./middleware/auth";
 import { login } from "./routes/login";
@@ -23,13 +23,13 @@ app.post("/signup", signup);
 
 app.post("/login", login);
 
-// app.get("/", verifyJwt, (req, res) => {
-//   res.send(true);
-// });
+app.get("/", (req, res) => {
+  const username = req.cookies.username;
+  console.log(username);
+});
 
 app.post("/paper", async (req, res) => {
   const paperData = req.body?.paper;
-  console.log(paperData);
   const lakeName: string = req.body.lake;
   const username = req.body.username;
   const user = await User.findOne({ username });
@@ -78,6 +78,8 @@ app.post("/viewlakes", async (req: Request, res: Response) => {
 
 app.get("/lakes/:lakeId", async (req, res) => {
   try {
+    const username = req.cookies.username;
+    console.log("username", username);
     const lakeName = req.params.lakeId;
     const user = await User.findOne({ "lakes.lakeName": lakeName });
     if (!user) {
